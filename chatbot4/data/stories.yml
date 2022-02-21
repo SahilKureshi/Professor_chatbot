@@ -1,0 +1,72 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: get topic happy
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_topic
+  - action: action_get_professor
+  - intent: affirm
+  - action: utter_goodbye
+
+- story: get topic not happy
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_topic
+  - action: action_get_professor
+  - intent: deny
+  - action: utter_unhappy_topic
+  - intent: ask_topic
+  - action: action_get_professor
+  - intent: affirm
+  - action: utter_goodbye
+#Here this is not a good practice to as we are calling action get professors multiple time 
+#instead we can do like create rule like everytime user intent is ask topic run action action_get_professors
+#for time being I am following above process.
+
+
+
+
+
+
+
+# - story: get professors
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: ask_topic
+#     entities:
+#     - topic_name: chemistry
+#   - slot_was_set:
+#     - topic_name: chemistry
+#   - action: action_get_professor
